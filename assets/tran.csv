@@ -1,0 +1,11 @@
+Test,Output,Nominal,Spec,Weight,Pass/Fail
+tran,iQ,13.86e-6,,,
+tran,undershoot,663.4e-3,,,
+tran,overshoot,204.1e-3,,,
+tran,tr,18.51e-12,,,
+tran,/out,,,,
+tran,/NM0/S,,,,
+tran,/amp,,,,
+tran,/ctrl,,,,
+tran,/V0/PLUS,,,,
+
