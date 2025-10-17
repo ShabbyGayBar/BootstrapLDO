@@ -273,7 +273,7 @@ def tran_comp_waveform(save_path="../temp"):
     # print(df)
 
     fig, ax1 = plt.subplots()
-    fig.set_size_inches(10, 6)
+    fig.set_size_inches(5, 6)
 
     color='blue'
     ax1.set_xlabel('Time (s)')
@@ -294,6 +294,8 @@ def tran_comp_waveform(save_path="../temp"):
     fig.tight_layout()  # otherwise the right y-label is slightly clipped
 
     # Zoom in Undershoot
+    fig.set_size_inches(10, 6)
+
     t = [2e-6, 2e-6+68.21e-12]
     v = [0.9990976356428115, 1-275.8e-3]
 
@@ -322,6 +324,8 @@ def tran_comp_waveform(save_path="../temp"):
     fig.savefig(f"{save_path}/tran_comp_waveform_undershoot_zoom.svg")
 
     # Undershoot
+    fig.set_size_inches(5, 6)
+
     ax1.set_xlim(1.99e-6, 2.05e-6)
     ax1.set_ylim(0.6, 1.3)
     ax2.yaxis.set_visible(False)
@@ -368,7 +372,7 @@ def tran_waveform(save_path="../temp"):
     # print(df)
 
     fig, ax1 = plt.subplots()
-    fig.set_size_inches(10, 6)
+    fig.set_size_inches(5, 6)
 
     color='blue'
     ax1.set_xlabel('Time (s)')
@@ -389,6 +393,7 @@ def tran_waveform(save_path="../temp"):
     fig.tight_layout()  # otherwise the right y-label is slightly clipped
 
     # Zoom in Undershoot
+    fig.set_size_inches(10, 6)
     t = [2e-6, 2e-6+18.51e-12]
     v = [1.000765703871354, 1-663.4e-3]
 
@@ -417,6 +422,8 @@ def tran_waveform(save_path="../temp"):
     fig.savefig(f"{save_path}/tran_waveform_undershoot_zoom.svg")
 
     # Undershoot
+    fig.set_size_inches(5, 6)
+
     ax1.set_xlim(1.99e-6, 2.05e-6)
     ax1.set_ylim(0.25, 1.3)
     ax2.yaxis.set_visible(False)
