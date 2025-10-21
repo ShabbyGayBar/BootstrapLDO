@@ -44,7 +44,7 @@ To address these challenges, this work proposes a bootstrapped NMOS LDO. By util
 
 A conventional NMOS LDO architecture is illustrated in @schematic_conventional, where the NMOS pass transistor regulates the output voltage based on the feedback from the output node. The gate of the NMOS transistor is driven by an error amplifier that compares the output voltage with a reference voltage.
 
-A major limitation of this architecture is the requirement for a higher gate voltage to ensure proper operation of the NMOS transistor. This is often challenging in low supply voltage scenarios.
+A major limitation of this architecture is its need for a higher gate voltage to ensure proper NMOS transistor operation. This is often challenging in low supply voltage scenarios.
 
 Multiple techniques have been proposed to overcome this limitation, such as using charge pumps@charge_pump_LDO_2022 or using a higher separate voltage supply. However, these approaches can introduce additional complexity, power consumption, and noise into the system.
 
@@ -103,7 +103,7 @@ The effectiveness of the dummy switches in reducing voltage spikes is demonstrat
 
 #figure(
   image("../figures/bootstrap.png"),
-  caption: [Complete bootstrap circuit schematic with dummy switches],
+  caption: [Complete schematic of the bootstrap circuit, including dummy switches for charge injection mitigation],
 ) <bootstrap>
 
 The schematic of the complete bootstrap circuit with dummy switches is shown in @bootstrap.
@@ -166,7 +166,7 @@ By sweeping the load current from #qty(100, "nA") to #qty(10, "mA") at a constan
 
 == Transient Response <tran_response>
 
-The transient response of the LDO is evaluated by applying a step load current and observing the output voltage response. The rise & fall time of the load current step is set to #qty(1, "ps") for accurate FoM calculation.
+The transient response of the LDO is evaluated by applying a step load current and observing the output voltage response. The rise and fall times of the load current step are set to #qty(1, "ps") to ensure accurate FoM calculation.
 
 === Small Step Load Change <small_step>
 
@@ -235,11 +235,43 @@ The PSRR performance shows a higher attenuation of supply voltage variations tha
 
 = Conclusion
 
-This work presents a bootstrapped NMOS LDO regulator designed to operate effectively under low supply voltage conditions while maintaining high performance in terms of line regulation, load regulation, transient response, and PSRR. The proposed design leverages a bootstrap circuit to elevate the gate voltage of the NMOS pass transistor, enabling it to function efficiently even when the supply voltage is limited.
+This work presents a bootstrapped NMOS LDO regulator designed to operate effectively under low supply voltage conditions while maintaining high performance in terms of line regulation, load regulation, transient response, and PSRR, as shown in a table. The proposed design leverages a bootstrap circuit to elevate the gate voltage of the NMOS pass transistor, enabling it to function efficiently even when the supply voltage is limited.
 
-Simulation results demonstrate that the bootstrapped NMOS LDO achieves a line regulation of #qty(10.248, "mV/V", per: "\/"), a load regulation of #qty(0.534, "mV/mA", per: "\/"), and a transient response FoM as low as #qty(25.65, "fs") under large load steps.
+#figure(
+  table(
+    columns: (2fr, 1fr, 1fr),
+    align: center + horizon,
 
-Additionally, the design exhibits robust PSRR performance, making it suitable for applications requiring stable power delivery in low-voltage environments. The proposed bootstrapped NMOS LDO thus represents a promising solution for modern low-power electronic systems.
+    table.header([Metrics], [Values], [Units]),
+    table.cell(rowspan: 2)[Line Regulation\ (#qty(1.1, "V")-#qty(1.8, "V"))],
+    $10.248^1$, table.cell(rowspan: 2)[#unit("mV/V", per: "\/")],
+    $9.983^2$,
+    [Load Regulation\ (#qty(100, "nA")-#qty(10, "mA"))], $0.534$, unit("mV/mA", per: "\/"),
+    [Quiescent Current\ (at #qty(1.2, "V") supply voltage)], $13.38$, unit("uA"),
+    table.cell(rowspan: 2)[Transient Response FoM],
+    $912.6^3$, table.cell(rowspan: 2)[#unit("fs")],
+    $25.65^4$,
+    table.cell(rowspan: 2)[PSRR],
+    $lt.eq -34.0^5$, table.cell(rowspan: 2)[#unit("dB")],
+    $-16.7^6$,
+
+    table.cell(
+      colspan: 3,
+      align: left + horizon,
+    )[
+      #set text(size: 6pt)
+      1 At constant load current of #qty(100, "nA").\
+      2 At constant load current of #qty(10, "mA").\
+      3 Load current step from #qty(10, "uA") to #qty(1, "mA").\
+      4 Load current step from #qty(100, "nA") to #qty(10, "mA").\
+      5 Under #qty(3, "MHz")\
+      6 Peak PSRR at around #qty(300, "MHz")\
+    ],
+  ),
+  caption: [Summary of the bootstrapped nmos ldo performance metrics],
+) <tab:summary>
+
+Additionally, the design exhibits robust PSRR performance, making it suitable for applications requiring stable power delivery in low-voltage environments. The proposed bootstrapped NMOS LDO offers a promising solution for modern low-power electronic systems.
 
 == Potential Improvements
 
